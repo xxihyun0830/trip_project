@@ -8,9 +8,8 @@
       
   .col-sm
     .user_id
-      | asked on #{moment(item.createdAt).format('YYYY-MM-DD')}
+      | commented on #{moment(item.createdAt).format('YYYY-MM-DD')}
       if item.user_id
         | 
         | by #[a(href=`/users/${item.user_id.id}`)= item.user_id.name] 
-        | by #[a(href=`/users/${item.user_id.id}`)= item.user_id.type_code] 
 

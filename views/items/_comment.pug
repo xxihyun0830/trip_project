@@ -9,4 +9,4 @@
         if comment.user_id
           | 
           | by #[a(href=`/users/${comment.user_id.id}`)= comment.user_id.name]
-          | 별점 :  #[a(href=`/users/${comment.user_id.id}`)= comment.starScore]
+          | 별점 :  #[a(href=`/users/${comment.user_id.id}`)= comment.user_id.starScore]

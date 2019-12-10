@@ -10,18 +10,21 @@
           li.nav-item
             a.nav-link(href="items") 투어
 
-          //-로그인이 안되어 있는 경우
+         
           if (!currentUser) 
             li.nav-item
               a.nav-link(href='/signin') 로그인
             li.nav-item
               a.nav-link(href='/users/new') 회원가입
+            li.nav-item
+              a.nav-link(href='/oders/new') 투어 예약
           
-          //-로그인이 되어 있는 경우   
+             
           else
-            li.nav-item
-              a.nav-link(href=`/users/${currentUser._id}`) 마이 페이지
-            li.nav-item
-              a.nav-link(href='/signout') Signout
+            if(currentUser.type_code = 'customer')
+              li.nav-item
+                a.nav-link(href=`/users/${currentUser._id}`) 마이 페이지
+              li.nav-item
+                a.nav-link(href='/signout') Signout
         
           

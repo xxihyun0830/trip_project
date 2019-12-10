@@ -3,12 +3,10 @@ include ../includes/_paginate
 
 block content
   .container
-    form.form-inline.search-input-group(action='/items', method = 'GET')
-      i.fa.fa-serch
-      input.form-control(type='text', size = '30',display='center',name='term',placeholder='검색해보세요', aria-label='Search', value=term)
-      
+    form.form-inline.search-input-group(action='/orders', method = 'GET')
+     
     h3.main-title
-      |Tour Items
+      |투어 예약하기 
       if items.total > 0
         .small Total #{items.total} item(s)
 
