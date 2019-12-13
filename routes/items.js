@@ -88,11 +88,9 @@ router.get('/:id', catchErrors(async (req, res, next) => {
       title: req.body.title,
       user_id: user._id,
       content: req.body.content,
-      course = req.body.course;
-      place = req.body.place;
-      price = req.body.price;
-
-      
+      course = req.body.course,
+      place = req.body.place,
+      price = req.body.price      
     });
     await item.save();
     req.flash('success', 'Successfully posted');
