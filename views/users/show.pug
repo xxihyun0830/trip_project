@@ -1,5 +1,3 @@
-//- 이 페이지가 마이페이지 같은 거임
-//- 정보 수정 및 삭제, 조회 가능
 
 extends ../layout
 
@@ -16,7 +14,7 @@ block content
       dd.col-sm-9= user.createdAt
 
       dt.col-sm-3 Type code
-      dd.col-sm-9= user.type_code
+      dd.col-sm-9= user.type
       
       if user.facebook.id
         dt.col-sm-3 Facebook
@@ -25,7 +23,7 @@ block content
 
     hr
     p
-      if user.type_code = 'admin'
+      if user.type = 'admin'
         a.btn.btn-outline-secondary(href='/users/') List
         | 
         a.btn.btn-outline-danger.need-confirm-btn(href=`/users/${user._id}?_method=DELETE`) Delete
