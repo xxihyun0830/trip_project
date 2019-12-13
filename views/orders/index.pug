@@ -7,17 +7,17 @@ block content
      
     h3.main-title
       |투어 예약하기 
-      if items.total > 0
-        .small Total #{items.total} item(s)
+      if orders.total > 0
+        .small Total #{orders.total} order(s)
 
-    if items.total <= 0
-      .alert.alert-info No items available yet
+    if orders.total <= 0
+      .alert.alert-info No orders available yet
     else
-      .items
-        each item in items.docs
-          .item
-            a.title(href=`/items/${item.id}`)= item.title
-            include _item
-      +paginate(items, '/items', query)
+      .orders
+        each order in orders.docs
+          .order
+            a.item(href=`/orders/${order.id}`)= order.item
+            include _order
+      
     hr
-    a.btn.btn-primary(href='/items/new') Upload Tour Items
+    a.btn.btn-primary(href='/orders/new') Upload Tour orders
