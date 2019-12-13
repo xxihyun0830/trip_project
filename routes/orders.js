@@ -26,8 +26,8 @@ router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
 
 //예약 결과 화면 ->show.pug
 router.get('/:id', catchErrors(async (req, res, next) => {
-  const order = await order.findById(req.params.id).populate('user_id');
-  const orders = await Order.find({order: order.id}).populate('user_id');
+  const order = await order.findById(req.params.id).populate('userID');
+  const orders = await Order.find({order: order.id}).populate('userID');
 
   await order.save();
   res.render('orders/show', {order: order, orders : orders});
@@ -45,7 +45,7 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     const user = req.user;
     var order = new order({
       item: req.body.item,
-      user_id: user._id,
+      userID: user._id,
       people : req.body.people,
       tourDate : req.body.tourDate,
       totPrice : req.body.totPrice

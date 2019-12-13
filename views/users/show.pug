@@ -23,11 +23,9 @@ block content
 
     hr
     p
-      if user.type = 'admin'
-        a.btn.btn-outline-secondary(href='/users/') List
-        | 
-        a.btn.btn-outline-danger.need-confirm-btn(href=`/users/${user._id}?_method=DELETE`) Delete
-      else
+      a.btn.btn-outline-secondary(href='/users/') List
+      | 
+      a.btn.btn-outline-danger.need-confirm-btn(href=`/users/${user._id}?_method=DELETE`) Delete
       |
       a.btn.btn-outline-primary(href=`/users/${user._id}/edit`) Edit
       

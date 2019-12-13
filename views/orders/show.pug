@@ -8,7 +8,7 @@ block content
       include _order
 
       .buttons
-        if currentUser && order.user_id.id == currentUser.id
+        if currentUser && order.userID.id == currentUser.id
           | 
           a.btn.btn-outline-secondary(href=`/orders/${order.id}/edit`) Edit
           | 

@@ -9,7 +9,7 @@
   input.form-control(type="text", name = "price", value = item.price)
 .form-group
   label(for="content") 설명
-  textarea.form-control(name="content", rows="5",placeholder="여행지 소개")= item.content
+  textarea.form-control(name="content", rows="5",placeholder="여행지 소개",value= item.content)
 .form-group
   label(for="course") 여행코스
-  textarea.form-control(name="course", rows="8",placeholder="여행코스")= item.course
+  textarea.form-control(name="course", rows="8",placeholder="여행코스",value= item.course)

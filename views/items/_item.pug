@@ -7,9 +7,9 @@
       #[span.number.num-answers= item.numComments] comments,
       
   .col-sm
-    .user_id
+    .userID
       | commented on #{moment(item.createdAt).format('YYYY-MM-DD')}
-      if item.user_id
+      if item.userID
         | 
-        | by #[a(href=`/users/${item.user_id.id}`)= item.user_id.name] 
+        | by #[a(href=`/users/${item.userID.id}`)= item.userID.name] 
 

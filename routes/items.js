@@ -28,7 +28,7 @@ router.get('/', catchErrors(async (req, res, next) => {
   }
   const items = await Item.paginate(query, {
       sort: {createdAt: -1}, 
-      populate: 'user_id', 
+      populate: 'userID', 
       page: page, 
       limit: limit
   });
@@ -46,8 +46,8 @@ router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
 }));
   
 router.get('/:id', catchErrors(async (req, res, next) => {
-  const item = await Item.findById(req.params.id).populate('user_id');
-  const comments = await Comment.find({item: item.id}).populate('user_id');
+  const item = await Item.findById(req.params.id).populate('userID');
+  const comments = await Comment.find({item: item.id}).populate('userID');
   
 
   await item.save();
@@ -81,7 +81,7 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
   const user = req.user;
   var item = new item({
     title: req.body.title,
-    user_id: user._id,
+    userID: user._id,
     content: req.body.content,
     course : req.body.course,
     place : req.body.place,
@@ -102,7 +102,7 @@ router.post('/:id/comments', needAuth, catchErrors(async (req, res, next) => {
   }
 
   var comment = new Comment({
-    user_id: user._id,
+    userID: user._id,
     item: item._id,
     content: req.body.content
   });

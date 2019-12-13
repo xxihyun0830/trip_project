@@ -4,9 +4,9 @@
   .row.card-body
     .col-sm
     .col-sm.text-right
-      .user_id
+      .userID
         | commented on #{moment(comment.createdAt).format('YYYY-MM-DD')}
-        if comment.user_id
+        if comment.userID
           | 
-          | by #[a(href=`/users/${comment.user_id.id}`)= comment.user_id.name]
-          | 별점 :  #[a(href=`/users/${comment.user_id.id}`)= comment.user_id.starScore]
+          | by #[a(href=`/users/${comment.userID.id}`)= comment.userID.name]
+          | 별점 :  #[a(href=`/users/${comment.userID.id}`)= comment.userID.starScore]

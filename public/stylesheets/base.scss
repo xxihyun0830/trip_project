@@ -15,12 +15,10 @@ a:hover {
 
 .jumbotron {
   margin-top: -1em;
-  background: url('/images/bg.jpg') ; 
-  max-width: 100% ;
-  height : auto;
+  background-color: whitesmoke ; 
   min-height: 20em;
-  color: #fff;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  color: rgb(0, 0, 0);
+  
 }
 
 .form-actions {
@@ -34,7 +32,7 @@ a:hover {
 .footer {
   margin-top: 1em;
   padding-top: 1em;
-  color: rgb(206, 206, 206);
+  color: rgb(116, 108, 108);
   border-top: .05rem solid #3f3f3f;
   
 }
