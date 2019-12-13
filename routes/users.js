@@ -55,7 +55,7 @@ router.get('/', needAuth, (req, res, next) => {
     console.log(users);
     
     res.render('users/index', {users: users});
-  }); // TODO: pagination?
+  });
 });
 
 router.get('/new', (req, res, next) => {
