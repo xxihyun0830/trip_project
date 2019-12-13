@@ -15,35 +15,35 @@ function needAuth(req, res, next) {
 }
 
 router.get('/', catchErrors(async (req, res, next) => {
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
-    
-    var query = {};
-    const term = req.query.term;
-    if (term) {
-        query = {$or: [
-        {title: {'$regex': term, '$options': 'i'}},
-        {numLikes: {'$regex': term, '$options': 'i'}}
-        ]};
-    }
-    const items = await Item.paginate(query, {
-        sort: {createdAt: -1}, 
-        populate: 'user_id', 
-        page: page, 
-        limit: limit
-    });
-    res.render('items/index', {items: items, term: term, query: req.query});
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  
+  var query = {};
+  const term = req.query.term;
+  if (term) {
+      query = {$or: [
+      {title: {'$regex': term, '$options': 'i'}},
+      {numLikes: {'$regex': term, '$options': 'i'}}
+      ]};
+  }
+  const items = await Item.paginate(query, {
+      sort: {createdAt: -1}, 
+      populate: 'user_id', 
+      page: page, 
+      limit: limit
+  });
+  res.render('items/index', {items: items, term: term, query: req.query});
 }));
 
 router.get('/new', needAuth, (req, res, next) => {
-    res.render('items/new', {item: {}});
-  });
+  res.render('items/new', {item: {}});
+});
   
 
 router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
-    const item = await Item.findById(req.params.id);
-    res.render('items/edit', {item: item});
-  }));
+  const item = await Item.findById(req.params.id);
+  res.render('items/edit', {item: item});
+}));
   
 router.get('/:id', catchErrors(async (req, res, next) => {
   const item = await Item.findById(req.params.id).populate('user_id');
@@ -55,71 +55,64 @@ router.get('/:id', catchErrors(async (req, res, next) => {
 }));
   
   //투어상품 등록한 거 수정하기
-  router.put('/:id', catchErrors(async (req, res, next) => {
-    const item = await Item.findById(req.params.id);
-  
-    if (!item) {
-      req.flash('danger', 'Not exist item');
-      return res.redirect('back');
-    }
+router.put('/:id', catchErrors(async (req, res, next) => {
+  const item = await Item.findById(req.params.id);
 
-    item.title = req.body.title;
-    item.content = req.body.content;
-    item.course = req.body.course;
-    item.place = req.body.place;
-    item.price = req.body.price;
-
-      
-    await item.save();
-    req.flash('success', 'Successfully updated');
-    res.redirect('/items');
-  }));
+  if (!item) {
+    req.flash('danger', 'Not exist item');
+    return res.redirect('back');
+  }
+  item.title = req.body.title;
+  item.content = req.body.content;
+    
+  await item.save();
+  req.flash('success', 'Successfully updated');
+  res.redirect('/items');
+}));
   
   //투어상품 삭제
-  router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
-    await Item.findOneAndRemove({_id: req.params.id});
-    req.flash('success', 'Successfully deleted');
-    res.redirect('/items');
-  }));
+router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
+  await Item.findOneAndRemove({_id: req.params.id});
+  req.flash('success', 'Successfully deleted');
+  res.redirect('/items');
+}));
+
+router.post('/', needAuth, catchErrors(async (req, res, next) => {
+  const user = req.user;
+  var item = new item({
+    title: req.body.title,
+    user_id: user._id,
+    content: req.body.content,
+    course = req.body.course,
+    place = req.body.place,
+    price = req.body.price      
+  });
+  await item.save();
+  req.flash('success', 'Successfully posted');
+  res.redirect('/items');
+}));
   
-  router.post('/', needAuth, catchErrors(async (req, res, next) => {
-    const user = req.user;
-    var item = new item({
-      title: req.body.title,
-      user_id: user._id,
-      content: req.body.content,
-      course = req.body.course,
-      place = req.body.place,
-      price = req.body.price      
-    });
-    await item.save();
-    req.flash('success', 'Successfully posted');
-    res.redirect('/items');
-  }));
+router.post('/:id/comments', needAuth, catchErrors(async (req, res, next) => {
+  const user = req.user;
+  const item = await item.findById(req.params.id);
+
+  if (!item) {
+    req.flash('danger', 'Not exist item');
+    return res.redirect('back');
+  }
+
+  var comment = new Comment({
+    user_id: user._id,
+    item: item._id,
+    content: req.body.content
+  });
+  await comment.save();
+  item.numComments++;
+  await item.save();
+
+  req.flash('success', 'Successfully commented');
+  res.redirect(`/items/${req.params.id}`);
+}));
   
-  router.post('/:id/comments', needAuth, catchErrors(async (req, res, next) => {
-    const user = req.user;
-    const item = await item.findById(req.params.id);
-  
-    if (!item) {
-      req.flash('danger', 'Not exist item');
-      return res.redirect('back');
-    }
-  
-    var comment = new Comment({
-      user_id: user._id,
-      item: item._id,
-      content: req.body.content
-    });
-    await comment.save();
-    item.numComments++;
-    await item.save();
-  
-    req.flash('success', 'Successfully commented');
-    res.redirect(`/items/${req.params.id}`);
-  }));
-  
-  
-  
-  module.exports = router;
+module.exports = router;
   
