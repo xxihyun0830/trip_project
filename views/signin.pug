@@ -8,8 +8,7 @@ block content
       form.form-signin(action='/signin', method='POST')
         h3.form-signin-heading 로그인하기
 
-          //- 여기서 쓰는 auth는 routes>auth.js
-        a.btn.btn-light.btn-block(href='/auth/facebook') 
+        a.btn.btn-dark.btn-block(href='/auth/facebook') 
           i.fa.fa-facebook.fa-lg
           | &nbsp;
           | 페북으로 로그인
@@ -32,17 +31,14 @@ block content
             input(type="checkbox", value="remember-me")
             |
             | 로그인 상태 유지
-            | &nbsp;
-            | &nbsp;
-            | &nbsp;
+            
             a(href='/reset-password') 비밀번호 찾기
 
         button.btn.btn-primary.btn-block(type='submit') 이메일로 로그인하기
 
-        
+        hr
         div.sub 
           | 아직 마이리얼트립 회원이 아니신가요? 
-          | &nbsp;
           a(href='/users/new') 회원가입
           
 

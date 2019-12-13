@@ -1,20 +1,71 @@
 extends layout
-//- 페이지 첫화면!
+
 block hero-unit
-  .jumbotron
+  .jumbotron.text-center
     .container
+      h1 마이리얼트립에 오신 걸 환영합니다.
+      p
+        | MyrealTrip help you choose nice place for trip. Please enjoy and
+        | have a nice trip for youself! And if you have any problems while
+        | using this site, please let me know that :)
+      p
+        a.btn.btn-primary.my-2(href='https://www.google.com/gmail/')  Send Gmail 
       
 block content
   .container
-    .row
-      .col-md-6
-        h3 서비스 목적
-        p 본 서비스는 웹프로그래밍 프로젝트를 위해서!
-      .col-md-6
-        h3 주요 기능
-        ul
-          li 회원가입/로그인
-          li 투어 상품 등록/관리
-          li 투어 상품 예약
-          li 투어 상품 조회
-          
+    .album.py-5.bg-light
+      .row
+        .col-md-4
+          .card.mb-4.shadow-sm
+            img.card-img-top(src='/public/images/america.jpg', alt='america')
+            .card-body
+              p.card-text
+                | 1. 미국으로 떠나는 여행
+        .col-md-4
+          .card.mb-4.shadow-sm
+            img.card-img-top(src='/public/images/australia.jpg', alt='australia')
+            .card-body
+              p.card-text
+                | 2. 호주로 떠나는 여행
+        .col-md-4
+          .card.mb-4.shadow-sm
+            img.card-img-top(src='/public/images/canada.jpg', alt='canada')
+            .card-body
+              p.card-text
+                | 3. 캐나다로 떠나는 여행
+        .col-md-4
+          .card.mb-4.shadow-sm
+            img.card-img-top(src='/public/images/danang.jpg', alt='danang')
+            .card-body
+              p.card-text
+                | 4. 다낭으로 떠나는 여행
+        .col-md-4
+          .card.mb-4.shadow-sm
+            img.card-img-top(src='/public/images/dubai.jpg', alt='dubai')
+            .card-body
+              p.card-text
+                | 5. 두바이로 떠나는 여행
+        .col-md-4
+          .card.mb-4.shadow-sm
+            img.card-img-top(src='/public/images/egypt.jpg', alt='egypt')
+            .card-body
+              p.card-text
+                | 6. 이집트로 떠나는 여행
+        .col-md-4
+          .card.mb-4.shadow-sm
+            img.card-img-top(src='/public/images/kenya.jpg', alt='kenya')
+            .card-body
+              p.card-text
+                | 7.케냐로 떠나는 여행
+        .col-md-4
+          .card.mb-4.shadow-sm
+            img.card-img-top(src='/public/images/paris.jpg', alt='paris')
+            .card-body
+              p.card-text
+                | 8. 파리로 떠나는 여행
+        .col-md-4
+          .card.mb-4.shadow-sm
+            img.card-img-top(src='/public/images/seoul.jpg', alt='seoul')
+            .card-body
+              p.card-text
+                | 9. 서울로 떠나는 여행
