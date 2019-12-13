@@ -45,16 +45,16 @@ router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
     res.render('items/edit', {item: item});
   }));
   
-  router.get('/:id', catchErrors(async (req, res, next) => {
-    const item = await Item.findById(req.params.id).populate('user_id');
-    const comments = await Comment.find({item: item.id}).populate('user_id');
-    
+router.get('/:id', catchErrors(async (req, res, next) => {
+  const item = await Item.findById(req.params.id).populate('user_id');
+  const comments = await Comment.find({item: item.id}).populate('user_id');
   
-    await item.save();
-    res.render('items/show', {item: item, comments: comments});
-  }));
+
+  await item.save();
+  res.render('items/show', {item: item, comments: comments});
+}));
   
-  //투어상품 등록
+  //투어상품 등록한 거 수정하기
   router.put('/:id', catchErrors(async (req, res, next) => {
     const item = await Item.findById(req.params.id);
   
@@ -62,8 +62,13 @@ router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
       req.flash('danger', 'Not exist item');
       return res.redirect('back');
     }
+
     item.title = req.body.title;
     item.content = req.body.content;
+    item.course = req.body.course;
+    item.place = req.body.place;
+    item.price = req.body.price;
+
       
     await item.save();
     req.flash('success', 'Successfully updated');
@@ -83,6 +88,10 @@ router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
       title: req.body.title,
       user_id: user._id,
       content: req.body.content,
+      course = req.body.course;
+      place = req.body.place;
+      price = req.body.price;
+
       
     });
     await item.save();

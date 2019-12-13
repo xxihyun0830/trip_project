@@ -10,21 +10,20 @@
           li.nav-item
             a.nav-link(href="items") 투어
 
-         
           if (!currentUser) 
             li.nav-item
               a.nav-link(href='/signin') 로그인
             li.nav-item
               a.nav-link(href='/users/new') 회원가입
             li.nav-item
+              a.nav-link(href='/users/show') 마이 페이지
+            li.nav-item
               a.nav-link(href='/oders/new') 투어 예약
-          
-             
+            li.nav-item
+              a.nav-link(href='/users/index')  Adim Page
+                         
           else
-            if(currentUser.type_code = 'customer')
-              li.nav-item
-                a.nav-link(href=`/users/${currentUser._id}`) 마이 페이지
-              li.nav-item
-                a.nav-link(href='/signout') Signout
+            li.nav-item
+              a.nav-link(href='/signout') Signout
         
           

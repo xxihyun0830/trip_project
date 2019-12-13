@@ -16,6 +16,7 @@ toJSON: { virtuals: true},
 toObject: {virtuals: true}
 });
 
+// option : 비밀번호 암호화
 schema.methods.generateHash = function(password){
     return bcrypt.hash(password, 10);
 };
