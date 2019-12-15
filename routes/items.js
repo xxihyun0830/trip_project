@@ -81,7 +81,7 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
 
 router.post('/', needAuth, catchErrors(async (req, res, next) => {
   const user = req.user;
-  var item = new item({
+  var item = new Item({
     title: req.body.title,
     userID: user._id,
     content: req.body.content,
@@ -96,7 +96,7 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
   
 router.post('/:id/comments', needAuth, catchErrors(async (req, res, next) => {
   const user = req.user;
-  const item = await item.findById(req.params.id);
+  const item = await Item.findById(req.params.id);
 
   if (!item) {
     req.flash('danger', 'Not exist item');
