@@ -5,7 +5,7 @@ block content
     h1.main-title= item.title
 
     .item.show
-      include _item
+    include _item
 
       .buttons
         button.btn.btn-primary #[i.fa.fa-thumbs-up] Like
@@ -18,9 +18,10 @@ block content
     if item.numComments > 0
       hr
       h3 #{item.numComments} comment(s)
-      .comments.show
-        each comment in comments
-          include _comment
+    
+    .comments.show
+      each comment in comments
+        include _comment
 
     form(action=`/items/${item.id}/comments`, method='POST')
       .form-group

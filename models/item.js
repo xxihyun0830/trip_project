@@ -8,7 +8,7 @@ var schema = new Schema({
     place : {type: String, trim:true, required:true},
     content :{type: String, trim:true, required:true},
     course :{type: String, trim:true, require:true },
-   
+    numComments: {type: Number, default:0},
     numLikes: {type: Number, default:0},
     numItems : {type: Number, default : 0},
     price : {type : Number, default : 0, required:true},
