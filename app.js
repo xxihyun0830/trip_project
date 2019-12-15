@@ -21,10 +21,10 @@ var passportConfig = require('./lib/passport-config');
 var app = express();
 
 
-// 띄어쓰기 입력 후 충력할 때!
-var str = document.getElementById("textarea").value;
-str = str.replace(/(?:\r\n|\r|\n)/g, '<br />');
-document.getElementById("result").value = str;
+// // 띄어쓰기 입력 후 충력할 때!
+// var str = document.getElementById("textarea").value;
+// str = str.replace(/(?:\r\n|\r|\n)/g, '<br />');
+// document.getElementById("result").value = str;
 
 
 // view engine setup
