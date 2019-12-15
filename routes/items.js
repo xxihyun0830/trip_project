@@ -13,7 +13,7 @@ function needAuth(req, res, next) {
       res.redirect('/signin');
   }
 }
-
+$
 router.get('/', catchErrors(async (req, res, next) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
@@ -23,7 +23,7 @@ router.get('/', catchErrors(async (req, res, next) => {
   if (term) {
       query = {$or: [
       {title: {'$regex': term, '$options': 'i'}},
-      {numLikes: {'$regex': term, '$options': 'i'}}
+      {content: {'$regex': term, '$options': 'i'}}
     ]};
   }
   const items = await Item.paginate(query, {
