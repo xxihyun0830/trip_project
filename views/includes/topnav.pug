@@ -19,9 +19,9 @@
             li.nav-item
               a.nav-link(href='/oders/new') 투어 예약
             li.nav-item
-                a.nav-link(href='/users/show') 마이 페이지
+              a.nav-link(href=`/users/${currentUser._id}`) 마이 페이지
             li.nav-item
-              a.nav-link(href='/users/index')  Admin Page
+              a.nav-link(href='/users') Admin Page
             li.nav-item
               a.nav-link(href='/signout') Signout
         
