@@ -6,12 +6,12 @@ const catchErrors = require('../lib/async-error');
 const router = express.Router();
 
 function needAuth(req, res, next) {
-    if (req.isAuthenticated()) {
-        next();
-    } else {
-        req.flash('danger', '로그인을 먼저 하세요. ');
-        res.redirect('/signin');
-    }
+  if (req.isAuthenticated()) {
+      next();
+  } else {
+      req.flash('danger', '로그인을 먼저 하세요. ');
+      res.redirect('/signin');
+  }
 }
 
 router.get('/', catchErrors(async (req, res, next) => {
@@ -24,7 +24,7 @@ router.get('/', catchErrors(async (req, res, next) => {
       query = {$or: [
       {title: {'$regex': term, '$options': 'i'}},
       {numLikes: {'$regex': term, '$options': 'i'}}
-      ]};
+    ]};
   }
   const items = await Item.paginate(query, {
       sort: {createdAt: -1}, 
@@ -54,7 +54,7 @@ router.get('/:id', catchErrors(async (req, res, next) => {
   res.render('items/show', {item: item, comments: comments});
 }));
   
-  //투어상품 등록한 거 수정하기
+// 
 router.put('/:id', catchErrors(async (req, res, next) => {
   const item = await Item.findById(req.params.id);
 
@@ -64,13 +64,15 @@ router.put('/:id', catchErrors(async (req, res, next) => {
   }
   item.title = req.body.title;
   item.content = req.body.content;
+  item.course = req.body.course;
+  item.place = req.body.place;
+  item.price = req.body.price;      
     
   await item.save();
   req.flash('success', 'Successfully updated');
   res.redirect('/items');
 }));
-  
-  //투어상품 삭제
+
 router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
   await Item.findOneAndRemove({_id: req.params.id});
   req.flash('success', 'Successfully deleted');
@@ -104,7 +106,8 @@ router.post('/:id/comments', needAuth, catchErrors(async (req, res, next) => {
   var comment = new Comment({
     userID: user._id,
     item: item._id,
-    content: req.body.content
+    content: req.body.content,
+    starScore: req.body.starScore
   });
   await comment.save();
   item.numComments++;
@@ -114,5 +117,7 @@ router.post('/:id/comments', needAuth, catchErrors(async (req, res, next) => {
   res.redirect(`/items/${req.params.id}`);
 }));
   
+
+
 module.exports = router;
   

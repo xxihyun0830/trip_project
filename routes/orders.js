@@ -13,38 +13,42 @@ function needAuth(req, res, next) {
     }
 }
 
-// 상품 예약하기 화면 -> new
+router.get('/', catchErrors(async (req, res, next) => {
+  res.render('orders/index', {orders: orders});
+}));
+
+
 router.get('/new', needAuth, (req, res, next) => {
     res.render('orders/new', {order: {}});
   });
   
-// 예약 수정하기
+
 router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
-    const order = await order.findById(req.params.id);
+    const order = await Order.findById(req.params.id);
     res.render('orders/edit', {order: order});
 }));
 
-//예약 결과 화면 ->show.pug
-router.get('/:id', catchErrors(async (req, res, next) => {
-  const order = await order.findById(req.params.id).populate('userID');
-  const orders = await Order.find({order: order.id}).populate('userID');
 
+router.get('/:id', catchErrors(async (req, res, next) => {
+  const order = await Order.findById(req.params.id).populate('userID');
+  
   await order.save();
-  res.render('orders/show', {order: order, orders : orders});
+  res.render('orders/show', {order: order});
 }));
 
-//예약 삭제
+// routes>question 57.router.put('/:id')
+
 router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
-    await order.findOneAndRemove({_id: req.params.id});
+    await Order.findOneAndRemove({_id: req.params.id});
     req.flash('success', 'Successfully deleted');
     res.redirect('/orders');
 }));
 
-// 예약하기 리스트 보여 주기 
+
 router.post('/', needAuth, catchErrors(async (req, res, next) => {
     const user = req.user;
-    var order = new order({
-      item: req.body.item,
+    var order = new Order({
+      item: item._id,
       userID: user._id,
       people : req.body.people,
       tourDate : req.body.tourDate,
@@ -55,7 +59,8 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     req.flash('success', 'Successfully posted');
     res.redirect('/orders');
   }));
+  
 
-  module.exports = router;
+module.exports = router;
   
 
