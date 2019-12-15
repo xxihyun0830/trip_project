@@ -20,6 +20,13 @@ var passportConfig = require('./lib/passport-config');
 
 var app = express();
 
+
+// 띄어쓰기 전환
+var str = document.getElementById("textarea").value;
+str = str.replace(/(?:\r\n|\r|\n)/g, '<br />');
+document.getElementById("result").value = str;
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
