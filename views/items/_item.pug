@@ -1,4 +1,13 @@
-.content= item.content
+.content=item.place
+br
+.content=item.title
+br
+.content=item.price
+br
+.content=item.content
+br
+.content=item.course
+
 
 .row
   .col-sm
@@ -12,4 +21,5 @@
       if item.userID
         | 
         | by #[a(href=`/users/${item.userID.id}`)= item.userID.name] 
+     
 

@@ -55,7 +55,7 @@ router.get('/:id', catchErrors(async (req, res, next) => {
 }));
   
 // 
-router.put('/:id', catchErrors(async (req, res, next) => {
+router.post('/:id', catchErrors(async (req, res, next) => {
   const item = await Item.findById(req.params.id);
 
   if (!item) {
